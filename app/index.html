@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>Naver Calculator</title>
+
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <link rel="stylesheet" href="styles/app.css">
+    <script type="text/javascript" src="scripts/main.min.js"></script>
+
+    <form name="calc">
+        <div id="calculator" class="calc">
+            <div id="calcTop">
+                <div class="calc-top">
+                    <h1>계산기</h1>
+                    <div class="calc-top-func">
+                        <button id="close" class="calc-btn-close"></button>
+                        <button id="minimize" class="calc-btn-hide"></button>
+                        <button id="full" class="calc-btn-full"></button>
+                    </div>
+                </div>
+                <div class="calc-disp">
+                    <input type="text" name="disp" value="0" readonly>
+                </div>
+            </div>
+            <div id="calcButton" class="calc-btn">
+                <ul>
+                    <li><input type="button" value="C"></li>
+                    <li><input type="button" value="±"></li>
+                    <li><input type="button" value="÷"></li>
+                    <li><input type="button" value="×"></li>
+
+                    <li><input type="button" value="7"></li>
+                    <li><input type="button" value="8"></li>
+                    <li><input type="button" value="9"></li>
+                    <li><input type="button" value="-"></li>
+
+                    <li><input type="button" value="4"></li>
+                    <li><input type="button" value="5"></li>
+                    <li><input type="button" value="6"></li>
+                    <li><input type="button" value="+"></li>
+
+                    <li><input type="button" value="1"></li>
+                    <li><input type="button" value="2"></li>
+                    <li><input type="button" value="3"></li>
+                    <li class="row-2"><input type="button" value="="></li>
+
+                    <li class="col-2"><input type="button" value="0"></li>
+                    <li><input type="button" value="."></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+
+    <button id='toggle' class="calc-btn-toggle display-hide">계산기</button>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,201 @@
+// normalize
+@import '../lib/normalize/variables',
+'../lib/normalize/vertical-rhythm',
+'../lib/normalize/normalize-mixin'
+;
+@include normalize();
+
+// reset
+@import '../lib/reset/reset';
+
+// compass
+@import "compass";
+
+// mixins
+@import '../mixins/_size.scss';
+
+// default
+body{
+  font-family: sans-serif;
+  overflow: hidden;
+  touch-action: manipulation;
+}
+
+button,
+input{
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  border: 0;
+  -webkit-appearance: none;
+}
+
+//common
+.display-hide{
+  opacity: 0 !important;
+}
+
+
+// calc
+.calc{
+  position: relative;
+  left: 0;
+  top: 0;
+  margin: 0 auto;
+  @include rem-fallback(width, 300px);
+  @include background-image(linear-gradient(-180deg, #333, #1f1f1f));
+  @include box-sizing(border-box);
+  border: 1px solid black;
+  @include border-radius(4px);
+  @include box-shadow(rgba(black, 0.5) 0 2px 3px);
+  opacity: 1;
+  @include transition(opacity 0.3s linear, top 0.3s linear, left 0.3s linear, transform 0.3s linear);
+}
+
+$calc-top-height: 32px;
+.calc-top{
+  position: relative;
+  @include rem-fallback(height, $calc-top-height);
+  text-align: center;
+
+  h1{
+    @include rem-fallback(line-height, $calc-top-height);
+    @include rem-fallback(font-size, 13px);
+    color: rgba(white, 0.7);
+  }
+}
+
+.calc-top-func{
+  position: absolute;
+  @include rem-fallback(top, 8px);
+  @include rem-fallback(left, 6px);
+
+  button{
+    @include rem-fallback(margin, 0, 1px);
+    display: inline-block;
+    @include rem-rectangle(10px);
+    border: 1px solid rgba(white, 0.2);
+    @include border-radius(100px);
+    @include box-sizing(border-box);
+
+    &.calc-btn-close{
+      @include background-image(linear-gradient(-180deg, #b82f33, #e97176));
+    }
+
+    &.calc-btn-hide{
+      @include background-image(linear-gradient(-180deg, #d9b071, #f7d399));
+    }
+
+    &.calc-btn-full{
+      @include background-image(linear-gradient(-180deg, #79aa57, #afd990));
+    }
+  }
+}
+
+.calc-disp{
+  @include rem-fallback(margin, 0, 8px);
+
+  input{
+    @include rem-fallback(padding, 0, 14px);
+    width: 100%;
+    @include rem-fallback(height, 64px);
+    text-align: right;
+    @include rem-fallback(font-size, 32px);
+    font-weight: lighter;
+    color: rgba(white, 0.7);
+    border: 1px solid black;
+    @include border-radius(6px);
+    @include background-image(linear-gradient(-180deg, #3b3b3b, #343434));
+    @include box-shadow(rgba(black, 0.5) 0 2px 3px inset);
+    @include box-sizing(border-box);
+  }
+}
+
+$calc-btn-height: 46px;
+$calc-btn-space: 4px;
+.calc-btn{
+  @include rem-fallback(padding, 4px);
+  @include box-sizing(border-box);
+
+  > ul{
+    overflow: hidden;
+
+    > li{
+      float: left;
+      @include rem-fallback(padding, 4px);
+      width: percentage(1/4);
+      @include box-sizing(border-box);
+
+      &.col-2{
+        width: percentage(1/2)
+      }
+
+      &.row-2{
+        float: right;
+        input{
+          vertical-align: top;
+          @include rem-fallback(height, $calc-btn-height * 2 + $calc-btn-space * 2);
+        }
+      }
+
+      input{
+        display: block;
+        position: relative;
+        width: 100%;
+        @include rem-fallback(height, $calc-btn-height);
+        @include rem-fallback(font-size, 18px);
+        font-weight: lighter;
+        color: rgba(white, 0.5);
+        border: 1px solid black;
+        @include border-radius(4px);
+        @include background-image(linear-gradient(-180deg, #353536, #2e2e2e));
+        @include box-sizing(border-box);
+
+        &:active{
+          @include box-shadow(rgba(black, 0.4) 0 2px 4px inset);
+          @include background-image(linear-gradient(0deg, #353536, #2e2e2e));
+        }
+
+        &::before{
+          content: '';
+          position: absolute;
+          top: 0;
+          left:0;
+          width: 100%;
+          @include rem-fallback(height, 1px);
+        }
+      }
+    }
+  }
+}
+
+button.calc-btn-toggle {
+  position: fixed;
+  @include rem-fallback(left, 14px);
+  @include rem-fallback(bottom, 14px);
+  @include rem-rectangle(60px, 30px);
+  @include rem-fallback(font-size, 12px);
+  color: rgba(white, 0.6);
+  @include border-radius(3px);
+  @include background-image(linear-gradient(-180deg, #353536, #2e2e2e));
+  @include box-shadow(rgba(black, 0.5) 0 1px 3px);
+  opacity: 1;
+  @include transition(all 0.2s ease-in-out);
+
+  &.display-hide{
+    @include rem-fallback(bottom, -60px);
+  }
+}
+
+@media (max-width: 768px){
+  .calc{
+    width: 100%;
+  }
+
+  .calc-disp{
+    input{
+      @include rem-fallback(height, 100px);
+      @include rem-fallback(font-size, 48px);
+    }
+  }
+}

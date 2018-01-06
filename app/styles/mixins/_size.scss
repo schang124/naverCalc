@@ -1,0 +1,42 @@
+// mixin for px and rem compatibility for IE < 11
+
+@function strip-unit($num) {
+  @return $num / ($num * 0 + 1);
+}
+
+@mixin rem-fallback($property, $values...){
+  $max: length($values);
+  $pxValues: '';
+  $remValues: '';
+
+  @for $i from 1 through $max {
+    $value: strip-unit(nth($values, $i));
+    $pxValues: #{$pxValues + $value}px;
+
+    @if $i < $max {
+      $pxValues: #{$pxValues + " "};
+    }
+  }
+
+  @for $i from 1 through $max {
+    $value: strip-unit(nth($values, $i));
+    $remValues: #{$remValues + $value / 16}rem;
+
+    @if($i< $max){
+      $remValues: #{$remValues + " "};
+    }
+  }
+
+  #{$property}: $pxValues;
+  #{$property}: $remValues;
+}
+
+@mixin rem-rectangle($value...){
+  @if length($value) == 2{
+    @include rem-fallback(width, nth($value, 1));
+    @include rem-fallback(height, nth($value, 2));
+  } @else {
+    @include rem-fallback(width, nth($value, 1));
+    @include rem-fallback(height, nth($value, 1));
+  }
+}
