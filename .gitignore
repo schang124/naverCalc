@@ -22,3 +22,6 @@ yarn-error.log*
 
 # untrack
 .idea/workspace.xml*
+.idea/*
+.sass-cache
+.tmp
