@@ -154,7 +154,9 @@ class Calculator {
 
     //fn
     processTotalFlag(s){
-        if (this.totalFlag && ( !isNaN(s) || s === '.') ) {
+        const afterTotal = this.totalFlag && ( !isNaN(s) || s === '.');
+        const needReset = !this.totalFlag && this.formula.length === 1 && this.prevFormula.length > 0 && !isNaN(s);
+        if (afterTotal || needReset) {
             this.clean();
         } else {
             this.totalFlag = false;
@@ -212,7 +214,8 @@ class Calculator {
         const prevSignPlus = prevSign === '+';
 
         let newSign = '';
-        const prevOnlySign = isNaN(this.formula[this.idx - 1]) && this.formula[this.idx - 1].length === 1
+        const prevFormula = this.formula[this.idx - 1];
+        const prevOnlySign = prevFormula && isNaN(prevFormula) && prevFormula.length === 1;
         if (prevSignMinus && (this.idx === 0 || prevOnlySign ) ) newSign = '';
         else if (prevSignMinus) newSign = '+';
         else if (prevSignPlus || validPrevSign) newSign = '-';
