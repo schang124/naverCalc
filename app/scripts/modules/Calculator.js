@@ -198,7 +198,6 @@ class Calculator {
             if(!this.isValidInputDigits()) return false;
             this.setIndexFormula(saved + s);
         }
-        console.log(this.formula);
         return true;
     }
 
