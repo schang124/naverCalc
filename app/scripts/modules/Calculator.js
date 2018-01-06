@@ -71,7 +71,7 @@ class Calculator {
 
             if(this.prevFormula.length === 0) return;
 
-            const validFormula = NumUtil.removeComma( this.formula.concat(this.prevFormula).join('') ).replace('×', '*').replace('÷', '/');
+            const validFormula = NumUtil.removeComma( this.formula.concat(this.prevFormula).join('') ).replace(/×/g, '*').replace(/÷/g, '/');
             r = eval(validFormula);
 
             // decimals limit 5
@@ -198,6 +198,7 @@ class Calculator {
             if(!this.isValidInputDigits()) return false;
             this.setIndexFormula(saved + s);
         }
+        console.log(this.formula);
         return true;
     }
 
@@ -208,13 +209,15 @@ class Calculator {
         const validPrevSign = prevSign !== '' && isNaN(prevSign);
         const onlySign = validPrevSign && validSaved && this.getIndexFormula().length === 1;
 
-        let newSign = s;
-        const prevSignMinus = prevSign.toString() === '-';
-        const prevSignPlus = prevSign.toString() === '+';
+        const prevSignMinus = prevSign === '-';
+        const prevSignPlus = prevSign === '+';
 
-        if (prevSignMinus && (this.idx === 0 || isNaN(this.formula[this.idx - 1]))) newSign = '';
+        let newSign = '';
+        const prevOnlySign = isNaN(this.formula[this.idx - 1]) && this.formula[this.idx - 1].length === 1
+        if (prevSignMinus && (this.idx === 0 || prevOnlySign ) ) newSign = '';
         else if (prevSignMinus) newSign = '+';
         else if (prevSignPlus || validPrevSign) newSign = '-';
+        else newSign = s;
 
         if (validPrevSign) {
             if(onlySign) return false;
